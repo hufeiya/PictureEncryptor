@@ -4,10 +4,18 @@ Encrypt some bytes you prescribed with a string key you give.So it's fast to dec
 ##Useage
 ###Encrypt
 ```java
-Encryptor encryptor = new Encryptor();
-Byte []encryptedDrawableBytes = encryptor.encrypt(drawable);
+Byte []encryptedDrawableBytes = Encryptor.encrypt(drawable);
 ```
 ###Decrypt
 ```java
-Drawable result = encryptor.decrypt(encryptedDrawableBytes);
+Drawable result = Encryptor.decrypt(encryptedDrawableBytes);
 ```
+###Change the key
+```java
+Encryptor.setPasswordCryptKey("Your key")
+```
+###Get the key
+```java
+String key = Encryptor.getPasswordCryptKey()
+```
+
