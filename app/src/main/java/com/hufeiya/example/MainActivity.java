@@ -23,18 +23,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
 
-        final Encryptor encryptor = new Encryptor();
         encryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                encryptedDrawableBytes = encryptor.encrypt(drawable);
+                encryptedDrawableBytes = Encryptor.encrypt(drawable);
                 image.setImageDrawable(null);
             }
         });
         decryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable result = encryptor.decrypt(encryptedDrawableBytes);
+                Drawable result = Encryptor.decrypt(encryptedDrawableBytes);
                 image.setImageDrawable(result);
             }
         });

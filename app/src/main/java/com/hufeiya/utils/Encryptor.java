@@ -7,23 +7,22 @@ import android.graphics.drawable.Drawable;
  */
 public class Encryptor {
 
-    private final int encryptLength = 1024;//encrpyt how many bytes from the picture head
+    private static final int encryptLength = 1024;//encrpyt how many bytes from the picture head
             //the decrypt length is not equal the encrypt length.
 
 
-
-    public byte [] encrypt(Drawable drawable){
+    public static byte [] encrypt(Drawable drawable){
         byte [] cipherDrawableBytes;
         cipherDrawableBytes = FormatTools.getInstance().Drawable2Bytes(drawable);
         cipherDrawableBytes = encryptDrawableBytes(cipherDrawableBytes);
         return cipherDrawableBytes;
     }
 
-    public Drawable decrypt(byte[] cipherDrawableBytes){
+    public static Drawable decrypt(byte[] cipherDrawableBytes){
         byte[] result = decryptDrawableBytes(cipherDrawableBytes);
         return FormatTools.getInstance().Bytes2Drawable(result);
     }
-    private byte[] encryptDrawableBytes(byte [] drawableBytes){
+    private static byte[] encryptDrawableBytes(byte [] drawableBytes){
         int decryptLength;
         byte [] supplementOfLost;      //If the decrypt length is longer than encrypt,it cause lost in drawable's byte array.
         byte [] tobeEncrypt = new byte[encryptLength];
@@ -48,7 +47,7 @@ public class Encryptor {
         return result;
     }
 
-    private byte[] decryptDrawableBytes(byte [] encryptedDrawableBytes){
+    private static byte[] decryptDrawableBytes(byte [] encryptedDrawableBytes){
 
         int differSize; // If the decrypt length is longer than encrypt, differSize is the differ,or it will be 0.
         differSize = (int)encryptedDrawableBytes[0];
@@ -63,8 +62,13 @@ public class Encryptor {
         System.arraycopy(encryptedDrawableBytes,jumpOverBytes+decrypted.length,result,decrypted.length,result.length-decrypted.length);
         if(differSize != 0){
             System.arraycopy(encryptedDrawableBytes,1,result,decrypted.length,differSize);
-            //supplementOfLost = null;
         }
         return result;
+    }
+    public static void setPasswordCryptKey(String key){
+        DES3Utils.setPasswordCryptKey(key);
+    }
+    public static String getPasswordCryptKey(){
+        return DES3Utils.getPasswordCryptKey();
     }
 }

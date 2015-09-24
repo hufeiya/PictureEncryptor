@@ -16,7 +16,7 @@ public class DES3Utils {
     // Define the encrypt type，DESede means 3DES
     private static final String Algorithm = "DESede";
     // encrypt key
-    private static final String PASSWORD_CRYPT_KEY = "hufeiya1993";
+    private static String PASSWORD_CRYPT_KEY = "hufeiya1993";
 
     /**
      * Encrypt method
@@ -86,5 +86,11 @@ public class DES3Utils {
             System.arraycopy(temp, 0, key, 0, key.length);
         }
         return key;
+    }
+    public static void setPasswordCryptKey(String key){
+        PASSWORD_CRYPT_KEY = key;
+    }
+    public static String getPasswordCryptKey(){
+        return PASSWORD_CRYPT_KEY;
     }
 }
