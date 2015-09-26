@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     private Button encryptButton;
     private Button decryptButton;
     private ImageView image;
-    private Drawable drawable;
     private byte[] encryptedDrawableBytes;
 
     @Override
@@ -26,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         encryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Drawable drawable = image.getDrawable();
                 encryptedDrawableBytes = Encryptor.encrypt(drawable);
                 image.setImageDrawable(null);
             }
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         encryptButton = (Button)findViewById(R.id.encrypt);
         decryptButton = (Button)findViewById(R.id.decrypt);
         image = (ImageView)findViewById(R.id.image);
-        drawable = getResources().getDrawable(R.drawable.example);
+        Drawable drawable = getResources().getDrawable(R.drawable.example);
         image.setImageDrawable(drawable);
     }
 }
